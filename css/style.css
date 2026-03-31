@@ -1,0 +1,33 @@
+/* Algemene styling */
+body {
+    margin: 0;
+    font-family: Arial;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    background: red;
+    color: white;
+    padding: 10px;
+}
+
+/* Logo */
+.logo img {
+    width: 50px;
+    border-radius: 50%;
+}
+
+/* Product grid */
+.products {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+/* Product kaart */
+.product {
+    border: 1px solid #ccc;
+    padding: 10px;
+}
