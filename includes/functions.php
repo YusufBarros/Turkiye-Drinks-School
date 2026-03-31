@@ -1,12 +1,13 @@
 <?php
 session_start();
 
-function add($id)
+function addToCart($id)
 {
-    if (!isset($_SESSION['cart'][$id]))
+    if (!isset($_SESSION['cart'][$id])) {
         $_SESSION['cart'][$id] = 1;
-    else
+    } else {
         $_SESSION['cart'][$id]++;
+    }
 }
 
 function total($conn)
@@ -14,6 +15,7 @@ function total($conn)
     $t = 0;
     if (!isset($_SESSION['cart']))
         return 0;
+
     foreach ($_SESSION['cart'] as $id => $q) {
         $r = $conn->query("SELECT prijs FROM dranken WHERE id=$id")->fetch_assoc();
         $t += $r['prijs'] * $q;
