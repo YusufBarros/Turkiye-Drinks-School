@@ -1,6 +1,6 @@
-<header>
-    <div class="logo">
-        <img src="/turkiye-drinks/assets/images/flag.png">
+<header class="header">
+    <div class="logo-container">
+        <img src="/turkiye-drinks/assets/images/flag.png" class="flag">
         <h1>The Turkiye Drinks</h1>
     </div>
 
