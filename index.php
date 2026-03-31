@@ -1,4 +1,6 @@
 <?php include 'includes/header.php'; ?>
-<link rel="stylesheet" href="css/style.css">
-<div class="home"><h1>Welkom bij The Turkiye Drinks</h1></div>
+<section class="home">
+    <h2>Welkom bij Yusuf</h2>
+    <p>Beste Turkse dranken webshop</p>
+</section>
 <footer>All rights reserved - Yusuf Bugra Aksari</footer>
