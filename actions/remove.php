@@ -1,1 +1,1 @@
-<?php include '../includes/functions.php'; removeFromCart($_GET['id']); header('Location: ../pages/cart.php'); ?>
+<?php include '../includes/functions.php'; remove($_GET['id']); header('Location: ../pages/cart.php'); ?>

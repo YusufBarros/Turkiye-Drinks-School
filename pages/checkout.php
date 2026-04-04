@@ -1,0 +1,1 @@
+<?php include '../includes/header.php'; ?><form action='../actions/order.php' method='POST' style='text-align:center'><input name='name' required placeholder='Naam'><br><input name='email' required placeholder='Email'><br><input name='adres' required placeholder='Adres'><br><button>Bestellen</button></form>

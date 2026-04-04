@@ -1,9 +1,1 @@
-<link rel="stylesheet" href="/turkiye-drinks/css/style.css">
-<header class="header">
-<h1>The Turkiye Drinks</h1>
-<nav>
-<a href="/turkiye-drinks/index.php">Home</a>
-<a href="/turkiye-drinks/pages/products.php">Producten</a>
-<a href="/turkiye-drinks/pages/cart.php">Winkelmand</a>
-</nav>
-</header>
+<link rel='stylesheet' href='/turkiye-drinks/css/style.css'><header><h1>The Turkiye Drinks</h1><nav><a href='/turkiye-drinks/index.php'>Home</a><a href='/turkiye-drinks/pages/products.php'>Producten</a><a href='/turkiye-drinks/pages/cart.php'>Winkelmand</a></nav></header>

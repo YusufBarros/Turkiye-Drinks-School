@@ -1,0 +1,1 @@
+<?php include '../includes/header.php'; ?><h2 style='text-align:center'>Bedankt voor je bestelling!</h2>

@@ -1,1 +1,1 @@
-<?php include '../includes/db.php'; include '../includes/functions.php'; saveOrder($conn,$_POST['name'],$_POST['email'],$_POST['adres']); echo 'Bestelling opgeslagen'; ?>
+<?php include '../includes/db.php'; include '../includes/functions.php'; if(strpos($_POST['email'],'@')===false){echo 'Email fout'; exit;} save($conn,$_POST['name'],$_POST['email'],$_POST['adres']); header('Location: ../pages/success.php'); ?>
