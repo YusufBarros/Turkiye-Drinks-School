@@ -11,9 +11,10 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 $drankId = isset($_POST['drank_id']) ? (int) $_POST['drank_id'] : 0;
+$nieuwAantal = isset($_POST['nieuw_aantal']) ? (int) $_POST['nieuw_aantal'] : 0;
 
 if ($drankId > 0) {
-    verwijderUitWinkelmandje($drankId);
+    wijzigAantalInWinkelmandje($drankId, $nieuwAantal);
 }
 
 header('Location: ' . $terugkeerUrl);

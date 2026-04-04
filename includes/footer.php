@@ -1,6 +1,8 @@
 </main>
 <footer class="footer">
-    <p>All rights reserved &mdash; Yusuf Bugra Aksari</p>
+    <p>&copy; <?= date('Y') ?> Turkiye Drinks &mdash; All rights reserved &mdash; Yusuf Bugra Aksari</p>
 </footer>
+<script src="<?= BASE_URL ?>/js/main.js"></script>
 </body>
+
 </html>
