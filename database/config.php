@@ -1,5 +1,5 @@
 <?php
-session_start(); // start sessie voor winkelmand
+session_start(); // start sessie voor winkelmandd
 
 $DB_HOST = "localhost";          // meestal localhost
 $DB_USER = "yusuf";  // gebruiker uit stap 3
