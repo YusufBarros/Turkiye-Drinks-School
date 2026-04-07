@@ -3,7 +3,7 @@ require_once '../includes/db.php';
 require_once '../includes/functions.php';
 include '../includes/header.php';
 
-// ── Haal filterwaarden op uit GET-parameters ─────────────────────
+// Haal filterwaarden op uit de URL
 $filters = [
     'zoekterm' => isset($_GET['zoekterm']) ? trim($_GET['zoekterm']) : '',
     'met_prik' => (isset($_GET['met_prik']) && $_GET['met_prik'] !== '') ? $_GET['met_prik'] : '',
@@ -11,18 +11,18 @@ $filters = [
     'regio' => isset($_GET['regio']) ? trim($_GET['regio']) : '',
 ];
 
-// ── Haal producten en regiolijst op via prepared statements ──────
+// Haal gefilterde producten en regio's op
 $drankLijst = haalAlleDrankenOp($db, $filters);
 $regioLijst = haalAlleRegiosOp($db);
 ?>
 
 <div class="producten-pagina">
 
-    <!-- ── Sidebar: filters ───────────────────────────────────── -->
+    <!-- Sidebar met filters -->
     <aside class="filter-sidebar">
         <h2 class="filter-sidebar__titel">Filters</h2>
 
-        <form method="GET" action="" class="filter-formulier" id="filter-formulier">
+        <form method="GET" action="" id="filter-formulier">
 
             <!-- Zoekbalk -->
             <div class="filter-groep">
@@ -65,7 +65,7 @@ $regioLijst = haalAlleRegiosOp($db);
                 </label>
             </div>
 
-            <!-- Regio filter -->
+            <!-- Regio dropdown, verstuurt formulier bij wijziging -->
             <div class="filter-groep">
                 <label for="regio" class="filter-label">Regio</label>
                 <select name="regio" id="regio" class="filter-select" onchange="this.form.submit()">
@@ -79,22 +79,21 @@ $regioLijst = haalAlleRegiosOp($db);
             </div>
 
             <button type="submit" class="knop knop--filter">Filteren</button>
-            <a href="<?= BASE_URL ?>/pages/products.php" class="knop knop--reset">
-                Wis alle filters
-            </a>
+            <a href="<?= BASE_URL ?>/pages/products.php" class="knop knop--reset">Wis alle filters</a>
         </form>
     </aside>
 
-    <!-- ── Producten overzicht ────────────────────────────────── -->
+    <!-- Producten overzicht -->
     <section class="producten-sectie">
         <div class="producten-header">
             <h1 class="producten-titel">Onze Dranken</h1>
             <span class="producten-aantal">
-                <?= count($drankLijst) ?> product<?= count($drankLijst) !== 1 ? 'en' : '' ?> gevonden
+                <?= count($drankLijst) ?> product
+                <?= count($drankLijst) !== 1 ? 'en' : '' ?> gevonden
             </span>
         </div>
 
-        <!-- "Geen resultaten" – getoond door JS bij live-zoeken -->
+        <!-- Wordt getoond door JS bij live zoeken als niets overeenkomt -->
         <p id="geen-resultaten" style="display:none;" class="geen-producten">
             Geen dranken gevonden met deze zoekopdracht.
         </p>
@@ -107,6 +106,7 @@ $regioLijst = haalAlleRegiosOp($db);
         <?php else: ?>
             <div class="producten-grid">
                 <?php foreach ($drankLijst as $drank): ?>
+                    <!-- data-naam wordt gebruikt door de live zoekfunctie in JS -->
                     <article class="product-kaart" data-naam="<?= zuiverString($drank['naam']) ?>">
 
                         <a href="<?= BASE_URL ?>/pages/detail.php?id=<?= (int) $drank['id'] ?>"
@@ -127,6 +127,7 @@ $regioLijst = haalAlleRegiosOp($db);
                                 <?= zuiverString($drank['regio']) ?>
                             </p>
 
+                            <!-- Kenmerken labels -->
                             <div class="product-kaart__kenmerken">
                                 <?php if ($drank['met_prik']): ?>
                                     <span class="kenmerk kenmerk--prik">Prik</span>
@@ -142,12 +143,11 @@ $regioLijst = haalAlleRegiosOp($db);
                                 <?= formateerPrijs((float) $drank['prijs']) ?>
                             </p>
 
+                            <!-- Toevoegen aan winkelmandje -->
                             <form action="<?= BASE_URL ?>/actions/add.php" method="POST" class="product-kaart__formulier">
                                 <input type="hidden" name="drank_id" value="<?= (int) $drank['id'] ?>">
                                 <input type="hidden" name="terugkeer_url" value="<?= BASE_URL ?>/pages/products.php">
-                                <button type="submit" class="knop knop--toevoegen">
-                                    + Toevoegen
-                                </button>
+                                <button type="submit" class="knop knop--toevoegen">+ Toevoegen</button>
                             </form>
                         </div>
                     </article>

@@ -4,7 +4,7 @@ require_once '../includes/functions.php';
 
 $winkelmandjeLijst = haalWinkelmandjeItems($db);
 
-// Leeg mandje → redirect naar winkelmandje
+// Leeg mandje → stuur terug naar het winkelmandje
 if (empty($winkelmandjeLijst)) {
     header('Location: ' . BASE_URL . '/pages/cart.php');
     exit;
@@ -12,7 +12,7 @@ if (empty($winkelmandjeLijst)) {
 
 $totaalprijs = berekenTotaalprijs($db);
 
-// Eventuele foutmelding uit vorige POST-poging
+// Haal eventuele foutmelding op uit vorige poging
 $foutmelding = $_SESSION['bestelling_fout'] ?? '';
 unset($_SESSION['bestelling_fout']);
 
@@ -23,32 +23,38 @@ include '../includes/header.php';
     <h1 class="pagina-titel">Afrekenen</h1>
 
     <?php if ($foutmelding): ?>
-        <p class="foutmelding"><?= zuiverString($foutmelding) ?></p>
+        <p class="foutmelding">
+            <?= zuiverString($foutmelding) ?>
+        </p>
     <?php endif; ?>
 
     <div class="checkout-container">
 
-        <!-- Bestellingoverzicht -->
+        <!-- Overzicht van de producten in het mandje -->
         <div class="bestelling-overzicht">
             <h2>Jouw bestelling</h2>
             <ul class="overzicht-lijst">
                 <?php foreach ($winkelmandjeLijst as $item): ?>
                     <li class="overzicht-item">
                         <span>
-                            <?= zuiverString($item['drank']['naam']) ?>
-                            &times; <?= $item['aantal'] ?>
+                            <?= zuiverString($item['drank']['naam']) ?> &times;
+                            <?= $item['aantal'] ?>
                         </span>
-                        <span><?= formateerPrijs($item['subtotaal']) ?></span>
+                        <span>
+                            <?= formateerPrijs($item['subtotaal']) ?>
+                        </span>
                     </li>
                 <?php endforeach; ?>
             </ul>
             <div class="overzicht-totaal">
                 <strong>Totaal:</strong>
-                <strong><?= formateerPrijs($totaalprijs) ?></strong>
+                <strong>
+                    <?= formateerPrijs($totaalprijs) ?>
+                </strong>
             </div>
         </div>
 
-        <!-- Bestelformulier -->
+        <!-- Formulier voor naam, email en adres -->
         <form action="<?= BASE_URL ?>/actions/order.php" method="POST" class="bestel-formulier">
 
             <div class="formulier-groep">
@@ -67,9 +73,7 @@ include '../includes/header.php';
                     maxlength="500"></textarea>
             </div>
 
-            <button type="submit" class="knop knop--groot knop--bestellen">
-                Bestelling plaatsen
-            </button>
+            <button type="submit" class="knop knop--groot knop--bestellen">Bestelling plaatsen</button>
         </form>
     </div>
 </div>
