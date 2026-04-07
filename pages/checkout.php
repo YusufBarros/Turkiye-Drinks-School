@@ -2,6 +2,7 @@
 require_once '../includes/db.php';
 require_once '../includes/functions.php';
 
+// Haal alle items op uit het winkelmandje
 $winkelmandjeLijst = haalWinkelmandjeItems($db);
 
 // Leeg mandje → stuur terug naar het winkelmandje
@@ -12,7 +13,7 @@ if (empty($winkelmandjeLijst)) {
 
 $totaalprijs = berekenTotaalprijs($db);
 
-// Haal eventuele foutmelding op uit vorige poging
+// Haal eventuele foutmelding op uit een vorige mislukte poging
 $foutmelding = $_SESSION['bestelling_fout'] ?? '';
 unset($_SESSION['bestelling_fout']);
 
@@ -22,6 +23,7 @@ include '../includes/header.php';
 <div class="checkout-pagina">
     <h1 class="pagina-titel">Afrekenen</h1>
 
+    <!-- Toon foutmelding als de vorige bestelling mislukt is -->
     <?php if ($foutmelding): ?>
         <p class="foutmelding">
             <?= zuiverString($foutmelding) ?>
@@ -30,11 +32,12 @@ include '../includes/header.php';
 
     <div class="checkout-container">
 
-        <!-- Overzicht van de producten in het mandje -->
+        <!-- Overzicht van alle producten in het mandje -->
         <div class="bestelling-overzicht">
             <h2>Jouw bestelling</h2>
             <ul class="overzicht-lijst">
                 <?php foreach ($winkelmandjeLijst as $item): ?>
+                    <!-- Productnaam x aantal + subtotaal per rij -->
                     <li class="overzicht-item">
                         <span>
                             <?= zuiverString($item['drank']['naam']) ?> &times;
@@ -46,6 +49,8 @@ include '../includes/header.php';
                     </li>
                 <?php endforeach; ?>
             </ul>
+
+            <!-- Totaalprijs onderaan het overzicht -->
             <div class="overzicht-totaal">
                 <strong>Totaal:</strong>
                 <strong>
@@ -54,7 +59,7 @@ include '../includes/header.php';
             </div>
         </div>
 
-        <!-- Formulier voor naam, email en adres -->
+        <!-- Formulier voor naam, e-mail en bezorgadres -->
         <form action="<?= BASE_URL ?>/actions/order.php" method="POST" class="bestel-formulier">
 
             <div class="formulier-groep">
@@ -73,6 +78,7 @@ include '../includes/header.php';
                     maxlength="500"></textarea>
             </div>
 
+            <!-- Verstuur de bestelling -->
             <button type="submit" class="knop knop--groot knop--bestellen">Bestelling plaatsen</button>
         </form>
     </div>

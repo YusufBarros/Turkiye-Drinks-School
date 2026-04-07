@@ -1,3 +1,6 @@
+Deze ziet er al goed uit met commentaar, er valt weinig aan toe te voegen. Ik heb alleen op een paar kleine plekken iets
+verduidelijkt:
+php
 <?php
 require_once '../includes/db.php';
 require_once '../includes/functions.php';
@@ -11,20 +14,21 @@ $filters = [
     'regio' => isset($_GET['regio']) ? trim($_GET['regio']) : '',
 ];
 
-// Haal gefilterde producten en regio's op
+// Haal gefilterde producten en alle regio's op uit de database
 $drankLijst = haalAlleDrankenOp($db, $filters);
 $regioLijst = haalAlleRegiosOp($db);
 ?>
 
 <div class="producten-pagina">
 
-    <!-- Sidebar met filters -->
+    <!-- Sidebar met filteropties -->
     <aside class="filter-sidebar">
         <h2 class="filter-sidebar__titel">Filters</h2>
 
+        <!-- Alle filters worden via GET verstuurd zodat de URL deelbaar is -->
         <form method="GET" action="" id="filter-formulier">
 
-            <!-- Zoekbalk -->
+            <!-- Zoekbalk: live filtering via JS, server-side filtering via GET -->
             <div class="filter-groep">
                 <label for="zoekbalk" class="filter-label">Zoeken</label>
                 <input type="text" id="zoekbalk" name="zoekterm" value="<?= zuiverString($filters['zoekterm']) ?>"
@@ -65,7 +69,7 @@ $regioLijst = haalAlleRegiosOp($db);
                 </label>
             </div>
 
-            <!-- Regio dropdown, verstuurt formulier bij wijziging -->
+            <!-- Regio dropdown, verstuurt formulier direct bij wijziging -->
             <div class="filter-groep">
                 <label for="regio" class="filter-label">Regio</label>
                 <select name="regio" id="regio" class="filter-select" onchange="this.form.submit()">
@@ -87,6 +91,7 @@ $regioLijst = haalAlleRegiosOp($db);
     <section class="producten-sectie">
         <div class="producten-header">
             <h1 class="producten-titel">Onze Dranken</h1>
+            <!-- Aantal gevonden producten, enkelvoud/meervoud correct weergeven -->
             <span class="producten-aantal">
                 <?= count($drankLijst) ?> product
                 <?= count($drankLijst) !== 1 ? 'en' : '' ?> gevonden
@@ -99,6 +104,7 @@ $regioLijst = haalAlleRegiosOp($db);
         </p>
 
         <?php if (empty($drankLijst)): ?>
+            <!-- Geen resultaten na server-side filtering -->
             <p class="geen-producten">
                 Geen dranken gevonden met de huidige filters.
                 <a href="<?= BASE_URL ?>/pages/products.php">Wis alle filters</a>
@@ -109,6 +115,7 @@ $regioLijst = haalAlleRegiosOp($db);
                     <!-- data-naam wordt gebruikt door de live zoekfunctie in JS -->
                     <article class="product-kaart" data-naam="<?= zuiverString($drank['naam']) ?>">
 
+                        <!-- Klikbare afbeelding naar detailpagina -->
                         <a href="<?= BASE_URL ?>/pages/detail.php?id=<?= (int) $drank['id'] ?>"
                             class="product-kaart__afbeelding-link">
                             <img src="<?= BASE_URL ?>/assets/images/<?= zuiverString($drank['afbeelding']) ?>"
@@ -143,7 +150,7 @@ $regioLijst = haalAlleRegiosOp($db);
                                 <?= formateerPrijs((float) $drank['prijs']) ?>
                             </p>
 
-                            <!-- Toevoegen aan winkelmandje -->
+                            <!-- Voeg product toe aan winkelmandje en keer terug naar deze pagina -->
                             <form action="<?= BASE_URL ?>/actions/add.php" method="POST" class="product-kaart__formulier">
                                 <input type="hidden" name="drank_id" value="<?= (int) $drank['id'] ?>">
                                 <input type="hidden" name="terugkeer_url" value="<?= BASE_URL ?>/pages/products.php">
@@ -158,4 +165,4 @@ $regioLijst = haalAlleRegiosOp($db);
 
 </div>
 
-<?php include '../includes/footer.php'; ?>
+<?php include '../includes/footer.php'; ?>Sonnet 4.6
