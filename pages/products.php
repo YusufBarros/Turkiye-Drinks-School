@@ -1,6 +1,3 @@
-Deze ziet er al goed uit met commentaar, er valt weinig aan toe te voegen. Ik heb alleen op een paar kleine plekken iets
-verduidelijkt:
-php
 <?php
 require_once '../includes/db.php';
 require_once '../includes/functions.php';
@@ -165,4 +162,4 @@ $regioLijst = haalAlleRegiosOp($db);
 
 </div>
 
-<?php include '../includes/footer.php'; ?>Sonnet 4.6
+<?php include '../includes/footer.php'; ?>
