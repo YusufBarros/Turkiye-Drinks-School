@@ -1,4 +1,5 @@
 <?php
+// Laad db en functions in als dat nog niet gedaan is
 if (!defined('BASE_URL')) {
     require_once __DIR__ . '/db.php';
 }
@@ -25,13 +26,17 @@ $huidigePagina = basename($_SERVER['PHP_SELF']);
             <a href="<?= BASE_URL ?>/index.php">Turkiye Drinks</a>
         </div>
         <nav class="header__nav">
+            <!-- Actieve pagina krijgt de class 'actief' voor styling -->
             <a href="<?= BASE_URL ?>/index.php" class="<?= $huidigePagina === 'index.php' ? 'actief' : '' ?>">Home</a>
+
             <a href="<?= BASE_URL ?>/pages/products.php"
                 class="<?= $huidigePagina === 'products.php' ? 'actief' : '' ?>">Producten</a>
+
             <a href="<?= BASE_URL ?>/pages/cart.php"
                 class="header__nav--mandje <?= $huidigePagina === 'cart.php' ? 'actief' : '' ?>">
                 Winkelmandje
                 <?php if ($aantalArtikelen > 0): ?>
+                    <!-- Laat het aantal artikelen zien als er iets in het mandje zit -->
                     <span class="header__badge"><?= $aantalArtikelen ?></span>
                 <?php endif; ?>
             </a>

@@ -11,11 +11,10 @@ $totaalprijs = berekenTotaalprijs($db);
     <h1 class="pagina-titel">Winkelmandje</h1>
 
     <?php if (empty($winkelmandjeLijst)): ?>
+        <!-- Leeg mandje -->
         <div class="leeg-mandje">
             <p>Je winkelmandje is leeg.</p>
-            <a href="<?= BASE_URL ?>/pages/products.php" class="knop knop--groot">
-                Bekijk producten
-            </a>
+            <a href="<?= BASE_URL ?>/pages/products.php" class="knop knop--groot">Bekijk producten</a>
         </div>
 
     <?php else: ?>
@@ -32,21 +31,25 @@ $totaalprijs = berekenTotaalprijs($db);
             <tbody>
                 <?php foreach ($winkelmandjeLijst as $item): ?>
                     <tr>
-                        <!-- Product naam + afbeelding -->
+                        <!-- Afbeelding + naam -->
                         <td class="mandje-product">
                             <img src="<?= BASE_URL ?>/assets/images/<?= zuiverString($item['drank']['afbeelding']) ?>"
                                 alt="<?= zuiverString($item['drank']['naam']) ?>" class="mandje-afbeelding"
                                 onerror="this.onerror=null;this.src='<?= BASE_URL ?>/assets/images/placeholder.png'">
-                            <span><?= zuiverString($item['drank']['naam']) ?></span>
+                            <span>
+                                <?= zuiverString($item['drank']['naam']) ?>
+                            </span>
                         </td>
 
                         <!-- Stuksprijs -->
-                        <td><?= formateerPrijs((float) $item['drank']['prijs']) ?></td>
+                        <td>
+                            <?= formateerPrijs((float) $item['drank']['prijs']) ?>
+                        </td>
 
-                        <!-- Aantal met +/- knoppen -->
+                        <!-- Aantal met min en plus knop -->
                         <td>
                             <div class="aantal-bediening">
-                                <!-- Min-knop -->
+                                <!-- Min knop -->
                                 <form action="<?= BASE_URL ?>/actions/update.php" method="POST" class="inline-formulier">
                                     <input type="hidden" name="drank_id" value="<?= (int) $item['drank']['id'] ?>">
                                     <input type="hidden" name="nieuw_aantal" value="<?= $item['aantal'] - 1 ?>">
@@ -55,9 +58,11 @@ $totaalprijs = berekenTotaalprijs($db);
                                     </button>
                                 </form>
 
-                                <span class="aantal-waarde"><?= $item['aantal'] ?></span>
+                                <span class="aantal-waarde">
+                                    <?= $item['aantal'] ?>
+                                </span>
 
-                                <!-- Plus-knop -->
+                                <!-- Plus knop -->
                                 <form action="<?= BASE_URL ?>/actions/update.php" method="POST" class="inline-formulier">
                                     <input type="hidden" name="drank_id" value="<?= (int) $item['drank']['id'] ?>">
                                     <input type="hidden" name="nieuw_aantal" value="<?= $item['aantal'] + 1 ?>">
@@ -66,10 +71,12 @@ $totaalprijs = berekenTotaalprijs($db);
                             </div>
                         </td>
 
-                        <!-- Subtotaal -->
-                        <td><?= formateerPrijs($item['subtotaal']) ?></td>
+                        <!-- Subtotaal van dit product -->
+                        <td>
+                            <?= formateerPrijs($item['subtotaal']) ?>
+                        </td>
 
-                        <!-- Verwijder -->
+                        <!-- Verwijder knop -->
                         <td>
                             <form action="<?= BASE_URL ?>/actions/remove.php" method="POST" class="inline-formulier">
                                 <input type="hidden" name="drank_id" value="<?= (int) $item['drank']['id'] ?>">
@@ -85,18 +92,17 @@ $totaalprijs = berekenTotaalprijs($db);
             <tfoot>
                 <tr>
                     <td colspan="3" class="totaal-label">Totaal</td>
-                    <td colspan="2" class="totaal-prijs"><?= formateerPrijs($totaalprijs) ?></td>
+                    <td colspan="2" class="totaal-prijs">
+                        <?= formateerPrijs($totaalprijs) ?>
+                    </td>
                 </tr>
             </tfoot>
         </table>
 
+        <!-- Knoppen onderaan -->
         <div class="mandje-acties">
-            <a href="<?= BASE_URL ?>/pages/products.php" class="knop knop--secundair">
-                ← Verder winkelen
-            </a>
-            <a href="<?= BASE_URL ?>/pages/checkout.php" class="knop knop--bestellen">
-                Afrekenen →
-            </a>
+            <a href="<?= BASE_URL ?>/pages/products.php" class="knop knop--secundair">← Verder winkelen</a>
+            <a href="<?= BASE_URL ?>/pages/checkout.php" class="knop knop--bestellen">Afrekenen →</a>
         </div>
     <?php endif; ?>
 </div>

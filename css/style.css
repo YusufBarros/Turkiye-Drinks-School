@@ -1,8 +1,3 @@
-/* ================================================================
-   Turkiye Drinks – Stijlblad
-   Warm Turks thema: rood, goud, warm wit
-   ================================================================ */
-
 /* ── CSS Variabelen ─────────────────────────────────────────────── */
 :root {
     --rood:            #C0392B;
@@ -59,13 +54,6 @@ img { display: block; max-width: 100%; }
     z-index: 100;
 }
 
-.header__logo a {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: var(--wit);
-    letter-spacing: 0.5px;
-}
-
 .header__nav {
     display: flex;
     align-items: center;
@@ -93,6 +81,7 @@ img { display: block; max-width: 100%; }
     gap: 7px;
 }
 
+/* Goud bolletje met het aantal producten in het mandje */
 .header__badge {
     background: var(--goud);
     color: #1a1a1a;
@@ -104,7 +93,6 @@ img { display: block; max-width: 100%; }
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    line-height: 1;
 }
 
 /* ── Main content ────────────────────────────────────────────────── */
@@ -121,6 +109,7 @@ img { display: block; max-width: 100%; }
     position: relative;
 }
 
+/* Donkere laag over de achtergrondafbeelding */
 .hero::before {
     content: '';
     position: absolute;
@@ -167,16 +156,9 @@ img { display: block; max-width: 100%; }
     line-height: 1.4;
 }
 
-.knop:hover {
-    background: var(--rood-donker);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 14px rgba(192,57,43,0.40);
-}
+.knop:hover { background: var(--rood-donker); }
 
-.knop--groot {
-    padding: 14px 36px;
-    font-size: 1.05rem;
-}
+.knop--groot { padding: 14px 36px; font-size: 1.05rem; }
 
 .knop--secundair {
     background: transparent;
@@ -184,17 +166,9 @@ img { display: block; max-width: 100%; }
     border: 2px solid var(--rood);
 }
 
-.knop--secundair:hover {
-    background: var(--rood);
-    color: var(--wit);
-}
+.knop--secundair:hover { background: var(--rood); color: var(--wit); }
 
-.knop--filter {
-    width: 100%;
-    text-align: center;
-    padding: 10px;
-    margin-top: 8px;
-}
+.knop--filter { width: 100%; text-align: center; padding: 10px; margin-top: 8px; }
 
 .knop--reset {
     display: block;
@@ -209,18 +183,11 @@ img { display: block; max-width: 100%; }
     padding: 8px;
 }
 
-.knop--reset:hover {
-    background: var(--rand);
-    color: var(--tekst);
-    box-shadow: none;
-    transform: none;
-}
+.knop--reset:hover { background: var(--rand); color: var(--tekst); }
 
-.knop--toevoegen {
-    width: 100%;
-    padding: 10px;
-}
+.knop--toevoegen { width: 100%; padding: 10px; }
 
+/* Groene bestelknop */
 .knop--bestellen {
     background: #27AE60;
     width: 100%;
@@ -229,10 +196,7 @@ img { display: block; max-width: 100%; }
     margin-top: 8px;
 }
 
-.knop--bestellen:hover {
-    background: #1E8449;
-    box-shadow: 0 4px 14px rgba(39,174,96,0.40);
-}
+.knop--bestellen:hover { background: #1E8449; }
 
 .knop--verwijder {
     background: transparent;
@@ -242,14 +206,9 @@ img { display: block; max-width: 100%; }
     font-size: 0.9rem;
 }
 
-.knop--verwijder:hover {
-    background: var(--rood);
-    color: var(--wit);
-    box-shadow: none;
-    transform: none;
-}
+.knop--verwijder:hover { background: var(--rood); color: var(--wit); }
 
-/* ── Producten pagina (2-koloms layout) ──────────────────────────── */
+/* ── Producten pagina ────────────────────────────────────────────── */
 .producten-pagina {
     display: flex;
     max-width: 1300px;
@@ -281,9 +240,7 @@ img { display: block; max-width: 100%; }
     border-bottom: 2px solid var(--goud-licht);
 }
 
-.filter-groep {
-    margin-bottom: 20px;
-}
+.filter-groep { margin-bottom: 20px; }
 
 .filter-label {
     display: block;
@@ -300,7 +257,6 @@ img { display: block; max-width: 100%; }
     align-items: center;
     gap: 8px;
     font-size: 0.9rem;
-    color: var(--tekst);
     margin-bottom: 6px;
     cursor: pointer;
     padding: 3px 0;
@@ -311,7 +267,6 @@ img { display: block; max-width: 100%; }
     width: 15px;
     height: 15px;
     cursor: pointer;
-    flex-shrink: 0;
 }
 
 .zoek-invoer {
@@ -320,18 +275,18 @@ img { display: block; max-width: 100%; }
     border: 1px solid var(--rand);
     border-radius: var(--radius-sm);
     font-size: 0.9rem;
-    color: var(--tekst);
     background: var(--warm-wit);
-    transition: var(--overgang);
     font-family: inherit;
 }
 
-.zoek-invoer:focus {
+.zoek-invoer:focus,
+.filter-select:focus {
     outline: none;
     border-color: var(--rood);
     box-shadow: 0 0 0 3px rgba(192,57,43,0.12);
 }
 
+/* Dropdown met aangepast pijltje */
 .filter-select {
     width: 100%;
     padding: 9px 32px 9px 12px;
@@ -348,11 +303,6 @@ img { display: block; max-width: 100%; }
     background-position: right 12px center;
 }
 
-.filter-select:focus {
-    outline: none;
-    border-color: var(--rood);
-}
-
 /* ── Producten sectie ────────────────────────────────────────────── */
 .producten-sectie { flex: 1; min-width: 0; }
 
@@ -361,20 +311,11 @@ img { display: block; max-width: 100%; }
     align-items: baseline;
     justify-content: space-between;
     margin-bottom: 24px;
-    flex-wrap: wrap;
     gap: 8px;
 }
 
-.producten-titel {
-    font-size: 1.7rem;
-    font-weight: 700;
-    color: var(--tekst);
-}
-
-.producten-aantal {
-    font-size: 0.85rem;
-    color: var(--tekst-licht);
-}
+.producten-titel { font-size: 1.7rem; font-weight: 700; }
+.producten-aantal { font-size: 0.85rem; color: var(--tekst-licht); }
 
 .producten-grid {
     display: grid;
@@ -412,9 +353,7 @@ img { display: block; max-width: 100%; }
     transition: transform 0.3s ease;
 }
 
-.product-kaart:hover .product-kaart__afbeelding {
-    transform: scale(1.06);
-}
+.product-kaart:hover .product-kaart__afbeelding { transform: scale(1.06); }
 
 .product-kaart__info {
     padding: 16px;
@@ -423,19 +362,9 @@ img { display: block; max-width: 100%; }
     flex: 1;
 }
 
-.product-kaart__naam {
-    font-size: 1rem;
-    font-weight: 700;
-    margin-bottom: 4px;
-}
-
+.product-kaart__naam { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
 .product-kaart__naam a:hover { color: var(--rood); }
-
-.product-kaart__regio {
-    font-size: 0.78rem;
-    color: var(--tekst-licht);
-    margin-bottom: 10px;
-}
+.product-kaart__regio { font-size: 0.78rem; color: var(--tekst-licht); margin-bottom: 10px; }
 
 .product-kaart__kenmerken {
     display: flex;
@@ -444,6 +373,7 @@ img { display: block; max-width: 100%; }
     margin-bottom: 12px;
 }
 
+/* Kleine gekleurde labels zoals "prik" of "alcohol" */
 .kenmerk {
     font-size: 0.7rem;
     font-weight: 700;
@@ -472,13 +402,9 @@ img { display: block; max-width: 100%; }
     text-align: center;
     color: var(--tekst-licht);
     padding: 56px 0;
-    font-size: 1rem;
 }
 
-.geen-producten a {
-    color: var(--rood);
-    text-decoration: underline;
-}
+.geen-producten a { color: var(--rood); text-decoration: underline; }
 
 /* ── Detail pagina ───────────────────────────────────────────────── */
 .detail-pagina {
@@ -498,78 +424,22 @@ img { display: block; max-width: 100%; }
     box-shadow: var(--schaduw);
 }
 
-.detail-afbeelding {
-    width: 100%;
-    height: 280px;
-    object-fit: contain;
-}
-
+.detail-afbeelding { width: 100%; height: 280px; object-fit: contain; }
 .detail-info { flex: 1; }
-
-.detail-naam {
-    font-size: 2rem;
-    font-weight: 800;
-    margin-bottom: 8px;
-}
-
-.detail-regio {
-    color: var(--tekst-licht);
-    font-size: 0.9rem;
-    margin-bottom: 16px;
-}
-
-.detail-kenmerken {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
-}
-
-.detail-beschrijving {
-    line-height: 1.8;
-    margin-bottom: 28px;
-    font-size: 1rem;
-    color: var(--tekst);
-}
-
-.detail-prijs {
-    font-size: 1.9rem;
-    font-weight: 700;
-    color: var(--rood);
-    margin-bottom: 24px;
-}
-
-.detail-knoppen {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: flex-start;
-}
+.detail-naam { font-size: 2rem; font-weight: 800; margin-bottom: 8px; }
+.detail-regio { color: var(--tekst-licht); font-size: 0.9rem; margin-bottom: 16px; }
+.detail-kenmerken { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+.detail-beschrijving { line-height: 1.8; margin-bottom: 28px; }
+.detail-prijs { font-size: 1.9rem; font-weight: 700; color: var(--rood); margin-bottom: 24px; }
+.detail-knoppen { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
 
 /* ── Winkelmandje pagina ─────────────────────────────────────────── */
-.winkelmandje-pagina {
-    max-width: 1000px;
-    margin: 40px auto;
-    padding: 0 24px;
-}
+.winkelmandje-pagina { max-width: 1000px; margin: 40px auto; padding: 0 24px; }
 
-.pagina-titel {
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin-bottom: 28px;
-    color: var(--tekst);
-}
+.pagina-titel { font-size: 1.8rem; font-weight: 700; margin-bottom: 28px; }
 
-.leeg-mandje {
-    text-align: center;
-    padding: 64px 0;
-    color: var(--tekst-licht);
-}
-
-.leeg-mandje p {
-    font-size: 1.1rem;
-    margin-bottom: 24px;
-}
+.leeg-mandje { text-align: center; padding: 64px 0; color: var(--tekst-licht); }
+.leeg-mandje p { font-size: 1.1rem; margin-bottom: 24px; }
 
 .mandje-tabel {
     width: 100%;
@@ -580,45 +450,17 @@ img { display: block; max-width: 100%; }
     box-shadow: var(--schaduw);
 }
 
-.mandje-tabel thead {
-    background: var(--rood);
-    color: var(--wit);
-}
-
-.mandje-tabel th {
-    padding: 14px 16px;
-    font-weight: 600;
-    font-size: 0.88rem;
-    text-align: left;
-    white-space: nowrap;
-}
-
-.mandje-tabel td {
-    padding: 14px 16px;
-    border-bottom: 1px solid var(--rand);
-    vertical-align: middle;
-}
-
+.mandje-tabel thead { background: var(--rood); color: var(--wit); }
+.mandje-tabel th { padding: 14px 16px; font-weight: 600; font-size: 0.88rem; text-align: left; }
+.mandje-tabel td { padding: 14px 16px; border-bottom: 1px solid var(--rand); vertical-align: middle; }
 .mandje-tabel tbody tr:last-child td { border-bottom: none; }
-
-.mandje-tabel tfoot {
-    background: var(--achtergrond);
-    font-weight: 700;
-}
-
-.mandje-tabel tfoot td {
-    padding: 16px;
-    font-size: 1.05rem;
-}
+.mandje-tabel tfoot { background: var(--achtergrond); font-weight: 700; }
+.mandje-tabel tfoot td { padding: 16px; font-size: 1.05rem; }
 
 .totaal-label { text-align: right; }
 .totaal-prijs { color: var(--rood); font-size: 1.2rem; }
 
-.mandje-product {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-}
+.mandje-product { display: flex; align-items: center; gap: 14px; }
 
 .mandje-afbeelding {
     width: 54px;
@@ -630,13 +472,8 @@ img { display: block; max-width: 100%; }
     flex-shrink: 0;
 }
 
-/* Aantal +/- bediening */
-.aantal-bediening {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
+/* ── Aantal +/- knoppen ──────────────────────────────────────────── */
+.aantal-bediening { display: flex; align-items: center; gap: 8px; }
 .inline-formulier { display: inline; }
 
 .aantal-knop {
@@ -653,44 +490,22 @@ img { display: block; max-width: 100%; }
     justify-content: center;
     color: var(--tekst);
     transition: var(--overgang);
-    line-height: 1;
-    vertical-align: middle;
 }
 
-.aantal-knop:hover:not(:disabled) {
-    background: var(--rood);
-    color: var(--wit);
-    border-color: var(--rood);
-}
-
-.aantal-knop:disabled {
-    opacity: 0.35;
-    cursor: not-allowed;
-}
-
-.aantal-waarde {
-    font-size: 1rem;
-    font-weight: 600;
-    min-width: 26px;
-    text-align: center;
-    display: inline-block;
-}
+.aantal-knop:hover:not(:disabled) { background: var(--rood); color: var(--wit); border-color: var(--rood); }
+.aantal-knop:disabled { opacity: 0.35; cursor: not-allowed; }
+.aantal-waarde { font-size: 1rem; font-weight: 600; min-width: 26px; text-align: center; display: inline-block; }
 
 .mandje-acties {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: 24px;
-    flex-wrap: wrap;
     gap: 12px;
 }
 
 /* ── Checkout pagina ─────────────────────────────────────────────── */
-.checkout-pagina {
-    max-width: 920px;
-    margin: 40px auto;
-    padding: 0 24px;
-}
+.checkout-pagina { max-width: 920px; margin: 40px auto; padding: 0 24px; }
 
 .checkout-container {
     display: grid;
@@ -699,12 +514,14 @@ img { display: block; max-width: 100%; }
     align-items: flex-start;
 }
 
-.bestelling-overzicht {
+.bestelling-overzicht, .bestel-formulier {
     background: var(--wit);
     border-radius: var(--radius);
     padding: 24px;
     box-shadow: var(--schaduw);
 }
+
+.bestel-formulier { padding: 28px; }
 
 .bestelling-overzicht h2 {
     font-size: 1.05rem;
@@ -714,10 +531,7 @@ img { display: block; max-width: 100%; }
     border-bottom: 1px solid var(--rand);
 }
 
-.overzicht-lijst {
-    list-style: none;
-    margin-bottom: 16px;
-}
+.overzicht-lijst { list-style: none; margin-bottom: 16px; }
 
 .overzicht-item {
     display: flex;
@@ -726,10 +540,6 @@ img { display: block; max-width: 100%; }
     font-size: 0.9rem;
     border-bottom: 1px solid var(--rand);
     gap: 12px;
-}
-
-.overzicht-item span:first-child {
-    color: var(--tekst);
 }
 
 .overzicht-totaal {
@@ -741,13 +551,6 @@ img { display: block; max-width: 100%; }
     color: var(--rood);
 }
 
-.bestel-formulier {
-    background: var(--wit);
-    border-radius: var(--radius);
-    padding: 28px;
-    box-shadow: var(--schaduw);
-}
-
 .formulier-groep { margin-bottom: 18px; }
 
 .formulier-groep label {
@@ -755,7 +558,6 @@ img { display: block; max-width: 100%; }
     font-weight: 600;
     font-size: 0.85rem;
     margin-bottom: 6px;
-    color: var(--tekst);
 }
 
 .formulier-groep input,
@@ -766,7 +568,6 @@ img { display: block; max-width: 100%; }
     border-radius: var(--radius-sm);
     font-size: 0.95rem;
     font-family: inherit;
-    color: var(--tekst);
     background: var(--warm-wit);
     transition: var(--overgang);
 }
@@ -799,6 +600,7 @@ img { display: block; max-width: 100%; }
     width: 100%;
 }
 
+/* Groen vinkje icoon */
 .succes-icoon {
     width: 72px;
     height: 72px;
@@ -813,18 +615,10 @@ img { display: block; max-width: 100%; }
     font-weight: 700;
 }
 
-.succes-kaart h1 {
-    font-size: 1.5rem;
-    margin-bottom: 12px;
-    color: var(--tekst);
-}
+.succes-kaart h1 { font-size: 1.5rem; margin-bottom: 12px; }
+.succes-kaart p { color: var(--tekst-licht); margin-bottom: 28px; }
 
-.succes-kaart p {
-    color: var(--tekst-licht);
-    margin-bottom: 28px;
-}
-
-/* ── Fout- en infomeldingen ──────────────────────────────────────── */
+/* ── Foutmeldingen ───────────────────────────────────────────────── */
 .foutmelding {
     background: #FDEDEC;
     color: var(--rood-donker);
@@ -835,16 +629,8 @@ img { display: block; max-width: 100%; }
     font-size: 0.9rem;
 }
 
-.fout-container {
-    text-align: center;
-    padding: 80px 24px;
-}
-
-.fout-container h2 {
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-    color: var(--tekst);
-}
+.fout-container { text-align: center; padding: 80px 24px; }
+.fout-container h2 { font-size: 1.5rem; margin-bottom: 20px; }
 
 /* ── Footer ──────────────────────────────────────────────────────── */
 .footer {
@@ -854,51 +640,4 @@ img { display: block; max-width: 100%; }
     padding: 20px;
     font-size: 0.85rem;
     margin-top: auto;
-}
-
-/* ── Responsive ──────────────────────────────────────────────────── */
-@media (max-width: 1100px) {
-    .producten-grid { grid-template-columns: repeat(2, 1fr); }
-}
-
-@media (max-width: 768px) {
-    .header { padding: 0 20px; }
-    .header__logo a { font-size: 1.2rem; }
-
-    .producten-pagina {
-        flex-direction: column;
-        padding: 20px 16px;
-    }
-
-    .filter-sidebar {
-        width: 100%;
-        position: static;
-    }
-
-    .producten-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
-
-    .hero__titel { font-size: 1.9rem; }
-
-    .detail-pagina {
-        flex-direction: column;
-        margin: 24px auto;
-    }
-
-    .detail-afbeelding-container {
-        flex: none;
-        width: 100%;
-    }
-
-    .checkout-container { grid-template-columns: 1fr; }
-
-    .mandje-acties { flex-direction: column; align-items: stretch; }
-    .mandje-acties .knop { text-align: center; }
-}
-
-@media (max-width: 480px) {
-    .producten-grid { grid-template-columns: 1fr; }
-    .hero__titel { font-size: 1.6rem; }
-    .header__nav { gap: 14px; }
-    .header__nav a { font-size: 0.85rem; }
-    .mandje-tabel th, .mandje-tabel td { padding: 10px 8px; font-size: 0.85rem; }
 }

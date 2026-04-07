@@ -8,12 +8,12 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-// ── Haal invoervelden op en trim spaties ──────────────────────────
+// Haal de ingevulde velden op en verwijder spaties
 $naam = isset($_POST['naam']) ? trim($_POST['naam']) : '';
 $email = isset($_POST['email']) ? trim($_POST['email']) : '';
 $adres = isset($_POST['adres']) ? trim($_POST['adres']) : '';
 
-// ── Valideer invoer ───────────────────────────────────────────────
+// Controleer of de invoer klopt
 $fouten = [];
 
 if (mb_strlen($naam) < 2) {
@@ -32,15 +32,17 @@ if (empty($_SESSION['winkelmandje'])) {
     $fouten[] = 'Je winkelmandje is leeg.';
 }
 
+// Als er fouten zijn, stuur terug naar checkout met foutmelding
 if (!empty($fouten)) {
     $_SESSION['bestelling_fout'] = implode(' ', $fouten);
     header('Location: ' . BASE_URL . '/pages/checkout.php');
     exit;
 }
 
-// ── Sla bestelling op via transactie ─────────────────────────────
+// Sla de bestelling op in de database
 $bestellingSucces = slaBestellingOp($db);
 
+// Stuur naar succes- of foutpagina
 if ($bestellingSucces) {
     header('Location: ' . BASE_URL . '/pages/success.php');
 } else {

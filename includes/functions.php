@@ -3,14 +3,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// ════════════════════════════════════════════════════════════
-//  DRANKEN
-// ════════════════════════════════════════════════════════════
-
-/**
- * Haal alle dranken op, optioneel gefilterd.
- * Filters: zoekterm, met_prik (0/1/''), alcohol (0/1/''), regio
- */
+// Haal alle dranken op, optioneel gefilterd op zoekterm, prik, alcohol of regio
 function haalAlleDrankenOp(PDO $db, array $filters = []): array
 {
     $sql = "SELECT * FROM dranken WHERE 1=1";
@@ -47,15 +40,11 @@ function haalAlleDrankenOp(PDO $db, array $filters = []): array
     }
 }
 
-/**
- * Haal één drank op via ID. Geeft null terug bij niet gevonden.
- */
+// Haal één drank op via ID, geeft null terug als die niet bestaat
 function haalDrankOpId(PDO $db, int $drankId): ?array
 {
     try {
-        $statement = $db->prepare(
-            "SELECT * FROM dranken WHERE id = :id LIMIT 1"
-        );
+        $statement = $db->prepare("SELECT * FROM dranken WHERE id = :id LIMIT 1");
         $statement->execute([':id' => $drankId]);
         $drank = $statement->fetch();
         return $drank ?: null;
@@ -64,9 +53,7 @@ function haalDrankOpId(PDO $db, int $drankId): ?array
     }
 }
 
-/**
- * Haal de lijst van alle unieke regio's op voor het filter-dropdown.
- */
+// Haal alle unieke regio's op voor het filter-dropdown
 function haalAlleRegiosOp(PDO $db): array
 {
     try {
@@ -82,13 +69,7 @@ function haalAlleRegiosOp(PDO $db): array
     }
 }
 
-// ════════════════════════════════════════════════════════════
-//  WINKELMANDJE  (sessie-opslag)
-// ════════════════════════════════════════════════════════════
-
-/**
- * Voeg een drank toe aan het winkelmandje (standaard 1 stuks).
- */
+// Voeg een drank toe aan het winkelmandje
 function voegToeAanWinkelmandje(int $drankId, int $aantal = 1): void
 {
     if (!isset($_SESSION['winkelmandje'])) {
@@ -97,6 +78,7 @@ function voegToeAanWinkelmandje(int $drankId, int $aantal = 1): void
 
     $sleutel = (string) $drankId;
 
+    // Als de drank er al in zit, tel het aantal op
     if (isset($_SESSION['winkelmandje'][$sleutel])) {
         $_SESSION['winkelmandje'][$sleutel] += $aantal;
     } else {
@@ -104,18 +86,13 @@ function voegToeAanWinkelmandje(int $drankId, int $aantal = 1): void
     }
 }
 
-/**
- * Verwijder een drank volledig uit het winkelmandje.
- */
+// Verwijder een drank volledig uit het winkelmandje
 function verwijderUitWinkelmandje(int $drankId): void
 {
     unset($_SESSION['winkelmandje'][(string) $drankId]);
 }
 
-/**
- * Stel een nieuw aantal in voor een drank.
- * Bij aantal ≤ 0 wordt de drank verwijderd.
- */
+// Pas het aantal aan, bij 0 of minder wordt de drank verwijderd
 function wijzigAantalInWinkelmandje(int $drankId, int $nieuwAantal): void
 {
     if ($nieuwAantal <= 0) {
@@ -125,10 +102,7 @@ function wijzigAantalInWinkelmandje(int $drankId, int $nieuwAantal): void
     }
 }
 
-/**
- * Geeft alle winkelmandje-items terug met drank-info en subtotaal.
- * Retourneert: [['drank' => [...], 'aantal' => int, 'subtotaal' => float], ...]
- */
+// Geeft alle winkelmandje-items terug met drank-info en subtotaal
 function haalWinkelmandjeItems(PDO $db): array
 {
     if (empty($_SESSION['winkelmandje'])) {
@@ -151,24 +125,19 @@ function haalWinkelmandjeItems(PDO $db): array
     return $winkelmandjeLijst;
 }
 
-/**
- * Berekent de totaalprijs van alle items in het winkelmandje.
- */
+// Berekent de totaalprijs van het winkelmandje
 function berekenTotaalprijs(PDO $db): float
 {
-    $winkelmandjeLijst = haalWinkelmandjeItems($db);
     $totaalprijs = 0.0;
 
-    foreach ($winkelmandjeLijst as $item) {
+    foreach (haalWinkelmandjeItems($db) as $item) {
         $totaalprijs += $item['subtotaal'];
     }
 
     return round($totaalprijs, 2);
 }
 
-/**
- * Geeft het totale aantal artikelen in het winkelmandje.
- */
+// Geeft het totale aantal artikelen in het winkelmandje
 function haalAantalWinkelmandjeArtikelen(): int
 {
     if (empty($_SESSION['winkelmandje'])) {
@@ -177,15 +146,8 @@ function haalAantalWinkelmandjeArtikelen(): int
     return (int) array_sum($_SESSION['winkelmandje']);
 }
 
-// ════════════════════════════════════════════════════════════
-//  BESTELLING  (transactie-veilig)
-// ════════════════════════════════════════════════════════════
-
-/**
- * Sla de huidige winkelmandje-inhoud op als bestelling.
- * Gebruikt een database-transactie zodat gedeeltelijke opslag
- * onmogelijk is. Bij succes wordt het winkelmandje leeggemaakt.
- */
+// Sla de bestelling op in de database via een transactie
+// Als er iets fout gaat, wordt alles teruggedraaid
 function slaBestellingOp(PDO $db): bool
 {
     if (empty($_SESSION['winkelmandje'])) {
@@ -197,15 +159,14 @@ function slaBestellingOp(PDO $db): bool
     try {
         $db->beginTransaction();
 
-        // Sla de bestelling op
+        // Sla de hoofdbestelling op
         $bestellingStatement = $db->prepare(
-            "INSERT INTO bestellingen (datum, totaalprijs)
-             VALUES (NOW(), :totaalprijs)"
+            "INSERT INTO bestellingen (datum, totaalprijs) VALUES (NOW(), :totaalprijs)"
         );
         $bestellingStatement->execute([':totaalprijs' => $totaalprijs]);
         $bestellingId = (int) $db->lastInsertId();
 
-        // Sla elk artikel op als bestelling-item
+        // Sla elk product op als losse regel
         $itemStatement = $db->prepare(
             "INSERT INTO bestelling_items (bestelling_id, drank_id, aantal)
              VALUES (:bestelling_id, :drank_id, :aantal)"
@@ -221,7 +182,7 @@ function slaBestellingOp(PDO $db): bool
 
         $db->commit();
 
-        // Leeghalen na succesvolle opslag
+        // Winkelmandje leegmaken na succesvolle bestelling
         $_SESSION['winkelmandje'] = [];
         $_SESSION['bestellingSucces'] = true;
 
@@ -232,21 +193,13 @@ function slaBestellingOp(PDO $db): bool
     }
 }
 
-// ════════════════════════════════════════════════════════════
-//  HELPERS
-// ════════════════════════════════════════════════════════════
-
-/**
- * Formatteer een prijs als "€ 1,50".
- */
+// Formatteer een getal als prijs, bv: € 1,50
 function formateerPrijs(float $prijs): string
 {
     return '€&nbsp;' . number_format($prijs, 2, ',', '.');
 }
 
-/**
- * Zuiver gebruikersinput: strip tags, trim, encode HTML-entiteiten.
- */
+// Maak gebruikersinput veilig door tags te strippen en HTML te escapen
 function zuiverString(string $invoer): string
 {
     return htmlspecialchars(strip_tags(trim($invoer)), ENT_QUOTES, 'UTF-8');

@@ -10,8 +10,10 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
+// Haal het drank-ID op uit het formulier
 $drankId = isset($_POST['drank_id']) ? (int) $_POST['drank_id'] : 0;
 
+// Verwijder het product als het ID geldig is
 if ($drankId > 0) {
     verwijderUitWinkelmandje($drankId);
 }
