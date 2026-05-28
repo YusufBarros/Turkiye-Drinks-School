@@ -1,4 +1,5 @@
 /* ── CSS Variabelen ─────────────────────────────────────────────── */
+/* Globale kleur- en stijlwaarden die overal hergebruikt worden */
 :root {
     --rood:            #C0392B;
     --rood-donker:     #922B21;
@@ -18,14 +19,17 @@
 }
 
 /* ── Reset & Base ────────────────────────────────────────────────── */
+/* Verwijdert standaard browser-afstand en zorgt dat padding binnen de breedte valt */
 *, *::before, *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Soepel scrollen bij ankerlinks */
 html { scroll-behavior: smooth; }
 
+/* Basisopmaak pagina: kolom-layout zodat footer altijd onderaan staat */
 body {
     font-family: 'Segoe UI', Arial, sans-serif;
     background: var(--achtergrond);
@@ -36,10 +40,13 @@ body {
     line-height: 1.6;
 }
 
+/* Verwijdert standaard link-styling */
 a { color: inherit; text-decoration: none; }
+/* Voorkomt dat afbeeldingen buiten hun container uitpuilen */
 img { display: block; max-width: 100%; }
 
 /* ── Header ──────────────────────────────────────────────────────── */
+/* Rode navigatiebalk die bovenaan blijft plakken bij scrollen */
 .header {
     background: var(--rood);
     color: var(--wit);
@@ -54,12 +61,14 @@ img { display: block; max-width: 100%; }
     z-index: 100;
 }
 
+/* Navigatielinks naast elkaar met ruimte ertussen */
 .header__nav {
     display: flex;
     align-items: center;
     gap: 28px;
 }
 
+/* Standaard stijl voor elk navigatie-item */
 .header__nav a {
     color: rgba(255,255,255,0.88);
     font-weight: 500;
@@ -69,12 +78,14 @@ img { display: block; max-width: 100%; }
     transition: var(--overgang);
 }
 
+/* Gouden streep onder actieve of gehoverde link */
 .header__nav a:hover,
 .header__nav a.actief {
     color: var(--wit);
     border-bottom-color: var(--goud);
 }
 
+/* Winkelmandje-link met icoon en badge naast elkaar */
 .header__nav--mandje {
     display: flex;
     align-items: center;
@@ -96,9 +107,11 @@ img { display: block; max-width: 100%; }
 }
 
 /* ── Main content ────────────────────────────────────────────────── */
+/* Vult alle beschikbare hoogte op zodat de footer naar beneden wordt geduwd */
 .main-content { flex: 1; }
 
 /* ── Hero ────────────────────────────────────────────────────────── */
+/* Grote achtergrondafbeelding als welkomstbanner op de homepagina */
 .hero {
     min-height: 85vh;
     background: url('../assets/images/istanbul12.jpg') center/cover no-repeat;
@@ -109,7 +122,7 @@ img { display: block; max-width: 100%; }
     position: relative;
 }
 
-/* Donkere laag over de achtergrondafbeelding */
+/* Donkere laag over de achtergrondafbeelding zodat tekst leesbaar blijft */
 .hero::before {
     content: '';
     position: absolute;
@@ -117,6 +130,7 @@ img { display: block; max-width: 100%; }
     background: rgba(0,0,0,0.50);
 }
 
+/* Centreert de tekst boven de donkere overlay */
 .hero__overlay {
     position: relative;
     z-index: 1;
@@ -125,6 +139,7 @@ img { display: block; max-width: 100%; }
     max-width: 640px;
 }
 
+/* Grote hoofdtitel op de homepagina */
 .hero__titel {
     font-size: 2.8rem;
     font-weight: 800;
@@ -133,6 +148,7 @@ img { display: block; max-width: 100%; }
     text-shadow: 0 2px 8px rgba(0,0,0,0.4);
 }
 
+/* Kleinere ondertitel onder de hoofdtitel */
 .hero__ondertitel {
     font-size: 1.15rem;
     opacity: 0.9;
@@ -140,6 +156,7 @@ img { display: block; max-width: 100%; }
 }
 
 /* ── Knoppen ─────────────────────────────────────────────────────── */
+/* Standaard rode knop die overal op de site gebruikt wordt */
 .knop {
     display: inline-block;
     background: var(--rood);
@@ -156,20 +173,26 @@ img { display: block; max-width: 100%; }
     line-height: 1.4;
 }
 
+/* Donkerder rood bij hoveren */
 .knop:hover { background: var(--rood-donker); }
 
+/* Grotere knop voor prominente call-to-actions */
 .knop--groot { padding: 14px 36px; font-size: 1.05rem; }
 
+/* Transparante knop met rode rand, alternatief voor de primaire knop */
 .knop--secundair {
     background: transparent;
     color: var(--rood);
     border: 2px solid var(--rood);
 }
 
+/* Vult op met rood bij hoveren */
 .knop--secundair:hover { background: var(--rood); color: var(--wit); }
 
+/* Filterknop die de volledige breedte van de sidebar inneemt */
 .knop--filter { width: 100%; text-align: center; padding: 10px; margin-top: 8px; }
 
+/* Resetknop om filters te wissen, subtiele stijl */
 .knop--reset {
     display: block;
     background: transparent;
@@ -183,11 +206,13 @@ img { display: block; max-width: 100%; }
     padding: 8px;
 }
 
+/* Lichte achtergrond bij hoveren */
 .knop--reset:hover { background: var(--rand); color: var(--tekst); }
 
+/* Toevoegen-aan-mandje knop neemt volledige breedte van de kaart in */
 .knop--toevoegen { width: 100%; padding: 10px; }
 
-/* Groene bestelknop */
+/* Groene bestelknop op de winkelmandje pagina */
 .knop--bestellen {
     background: #27AE60;
     width: 100%;
@@ -196,8 +221,10 @@ img { display: block; max-width: 100%; }
     margin-top: 8px;
 }
 
+/* Donkerder groen bij hoveren */
 .knop--bestellen:hover { background: #1E8449; }
 
+/* Verwijder-knop met rode rand, transparante achtergrond */
 .knop--verwijder {
     background: transparent;
     color: var(--rood);
@@ -206,9 +233,11 @@ img { display: block; max-width: 100%; }
     font-size: 0.9rem;
 }
 
+/* Vult op met rood bij hoveren */
 .knop--verwijder:hover { background: var(--rood); color: var(--wit); }
 
 /* ── Producten pagina ────────────────────────────────────────────── */
+/* Zij-aan-zij layout: filter-sidebar links, productenraster rechts */
 .producten-pagina {
     display: flex;
     max-width: 1300px;
@@ -219,6 +248,7 @@ img { display: block; max-width: 100%; }
 }
 
 /* ── Filter Sidebar ──────────────────────────────────────────────── */
+/* Vaste filterkolom die meescrolt maar bovenaan blijft hangen */
 .filter-sidebar {
     width: 230px;
     min-width: 200px;
@@ -231,6 +261,7 @@ img { display: block; max-width: 100%; }
     flex-shrink: 0;
 }
 
+/* Rode titel bovenaan de sidebar met gouden streep eronder */
 .filter-sidebar__titel {
     font-size: 1.05rem;
     font-weight: 700;
@@ -240,8 +271,10 @@ img { display: block; max-width: 100%; }
     border-bottom: 2px solid var(--goud-licht);
 }
 
+/* Elke filtergroep (bijv. categorie, prijs) heeft ruimte eronder */
 .filter-groep { margin-bottom: 20px; }
 
+/* Kleine kapitalenlabel boven een filtergroep */
 .filter-label {
     display: block;
     font-weight: 700;
@@ -252,6 +285,7 @@ img { display: block; max-width: 100%; }
     letter-spacing: 0.6px;
 }
 
+/* Rij met radio-knop en bijbehorend label */
 .filter-optie {
     display: flex;
     align-items: center;
@@ -262,6 +296,7 @@ img { display: block; max-width: 100%; }
     padding: 3px 0;
 }
 
+/* Radio-knop in rode kleur */
 .filter-optie input[type="radio"] {
     accent-color: var(--rood);
     width: 15px;
@@ -269,6 +304,7 @@ img { display: block; max-width: 100%; }
     cursor: pointer;
 }
 
+/* Zoekveld in de sidebar */
 .zoek-invoer {
     width: 100%;
     padding: 9px 12px;
@@ -279,6 +315,7 @@ img { display: block; max-width: 100%; }
     font-family: inherit;
 }
 
+/* Rode rand + zachte gloed als het veld geselecteerd is */
 .zoek-invoer:focus,
 .filter-select:focus {
     outline: none;
@@ -286,7 +323,7 @@ img { display: block; max-width: 100%; }
     box-shadow: 0 0 0 3px rgba(192,57,43,0.12);
 }
 
-/* Dropdown met aangepast pijltje */
+/* Dropdown met aangepast pijltje via SVG als achtergrondafbeelding */
 .filter-select {
     width: 100%;
     padding: 9px 32px 9px 12px;
@@ -304,8 +341,10 @@ img { display: block; max-width: 100%; }
 }
 
 /* ── Producten sectie ────────────────────────────────────────────── */
+/* Vult de resterende breedte naast de sidebar */
 .producten-sectie { flex: 1; min-width: 0; }
 
+/* Titel en aantal resultaten naast elkaar op één rij */
 .producten-header {
     display: flex;
     align-items: baseline;
@@ -314,9 +353,12 @@ img { display: block; max-width: 100%; }
     gap: 8px;
 }
 
+/* Paginatitel boven het raster */
 .producten-titel { font-size: 1.7rem; font-weight: 700; }
+/* Grijze tekst met het aantal gevonden producten */
 .producten-aantal { font-size: 0.85rem; color: var(--tekst-licht); }
 
+/* Drie kolommen breed raster met ruimte tussen de kaarten */
 .producten-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -324,6 +366,7 @@ img { display: block; max-width: 100%; }
 }
 
 /* ── Product kaart ───────────────────────────────────────────────── */
+/* Witte kaart per product met schaduw en hover-animatie */
 .product-kaart {
     background: var(--wit);
     border-radius: var(--radius);
@@ -334,11 +377,13 @@ img { display: block; max-width: 100%; }
     flex-direction: column;
 }
 
+/* Kaart zweeft omhoog bij hoveren */
 .product-kaart:hover {
     transform: translateY(-5px);
     box-shadow: var(--schaduw-hover);
 }
 
+/* Klikbaar afbeeldingsblok met lichte achtergrond */
 .product-kaart__afbeelding-link {
     display: block;
     background: var(--warm-wit);
@@ -346,6 +391,7 @@ img { display: block; max-width: 100%; }
     overflow: hidden;
 }
 
+/* Afbeelding schaalt niet uit verhouding, beperkte hoogte */
 .product-kaart__afbeelding {
     width: 100%;
     height: 160px;
@@ -353,8 +399,10 @@ img { display: block; max-width: 100%; }
     transition: transform 0.3s ease;
 }
 
+/* Afbeelding zoomt licht in bij hoveren over de kaart */
 .product-kaart:hover .product-kaart__afbeelding { transform: scale(1.06); }
 
+/* Tekstblok onder de afbeelding met naam, prijs en knop */
 .product-kaart__info {
     padding: 16px;
     display: flex;
@@ -362,10 +410,14 @@ img { display: block; max-width: 100%; }
     flex: 1;
 }
 
+/* Productnaam */
 .product-kaart__naam { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+/* Naam wordt rood bij hoveren */
 .product-kaart__naam a:hover { color: var(--rood); }
+/* Grijze regio-aanduiding onder de naam */
 .product-kaart__regio { font-size: 0.78rem; color: var(--tekst-licht); margin-bottom: 10px; }
 
+/* Rij met kenmerk-badges */
 .product-kaart__kenmerken {
     display: flex;
     gap: 6px;
@@ -383,11 +435,16 @@ img { display: block; max-width: 100%; }
     letter-spacing: 0.4px;
 }
 
+/* Blauwe badge voor bruisende dranken */
 .kenmerk--prik         { background: #D6EAF8; color: #1A5276; }
+/* Rode badge voor alcoholische dranken */
 .kenmerk--alcohol      { background: #FDEDEC; color: #922B21; }
+/* Groene badge voor dranken zonder prik */
 .kenmerk--geen-prik    { background: #EAFAF1; color: #1E8449; }
+/* Groene badge voor alcoholvrije dranken */
 .kenmerk--geen-alcohol { background: #EAFAF1; color: #1E8449; }
 
+/* Rode prijs rechtsonder in de kaart */
 .product-kaart__prijs {
     font-size: 1.15rem;
     font-weight: 700;
@@ -396,17 +453,21 @@ img { display: block; max-width: 100%; }
     margin-bottom: 12px;
 }
 
+/* Formulier met toevoegen-knop altijd onderaan de kaart */
 .product-kaart__formulier { margin-top: auto; }
 
+/* Melding als er geen producten gevonden zijn */
 .geen-producten {
     text-align: center;
     color: var(--tekst-licht);
     padding: 56px 0;
 }
 
+/* Link in de lege-staat melding */
 .geen-producten a { color: var(--rood); text-decoration: underline; }
 
 /* ── Detail pagina ───────────────────────────────────────────────── */
+/* Twee kolommen: grote afbeelding links, productinformatie rechts */
 .detail-pagina {
     display: flex;
     max-width: 920px;
@@ -416,6 +477,7 @@ img { display: block; max-width: 100%; }
     align-items: flex-start;
 }
 
+/* Witte kaart die de detailafbeelding omsluit */
 .detail-afbeelding-container {
     flex: 0 0 320px;
     background: var(--wit);
@@ -424,23 +486,35 @@ img { display: block; max-width: 100%; }
     box-shadow: var(--schaduw);
 }
 
+/* Detailafbeelding op vaste hoogte zonder vervorming */
 .detail-afbeelding { width: 100%; height: 280px; object-fit: contain; }
+/* Rechterkolom met alle tekstinformatie */
 .detail-info { flex: 1; }
+/* Grote naam van het product */
 .detail-naam { font-size: 2rem; font-weight: 800; margin-bottom: 8px; }
+/* Grijze regio-tekst onder de naam */
 .detail-regio { color: var(--tekst-licht); font-size: 0.9rem; margin-bottom: 16px; }
+/* Rij met kenmerk-badges op de detailpagina */
 .detail-kenmerken { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+/* Beschrijvingstekst met ruime regelafstand */
 .detail-beschrijving { line-height: 1.8; margin-bottom: 28px; }
+/* Grote rode prijs op de detailpagina */
 .detail-prijs { font-size: 1.9rem; font-weight: 700; color: var(--rood); margin-bottom: 24px; }
+/* Knoppen onder elkaar uitgelijnd links */
 .detail-knoppen { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
 
 /* ── Winkelmandje pagina ─────────────────────────────────────────── */
+/* Gecentreerde container voor de mandje-inhoud */
 .winkelmandje-pagina { max-width: 1000px; margin: 40px auto; padding: 0 24px; }
 
+/* Grote paginatitel boven de tabel of het lege mandje */
 .pagina-titel { font-size: 1.8rem; font-weight: 700; margin-bottom: 28px; }
 
+/* Gecentreerde melding als het mandje leeg is */
 .leeg-mandje { text-align: center; padding: 64px 0; color: var(--tekst-licht); }
 .leeg-mandje p { font-size: 1.1rem; margin-bottom: 24px; }
 
+/* Tabel met alle producten in het mandje */
 .mandje-tabel {
     width: 100%;
     border-collapse: collapse;
@@ -450,18 +524,27 @@ img { display: block; max-width: 100%; }
     box-shadow: var(--schaduw);
 }
 
+/* Rode tabelkop */
 .mandje-tabel thead { background: var(--rood); color: var(--wit); }
+/* Kolomtitels in de kop */
 .mandje-tabel th { padding: 14px 16px; font-weight: 600; font-size: 0.88rem; text-align: left; }
+/* Cellen met scheidingslijn tussen rijen */
 .mandje-tabel td { padding: 14px 16px; border-bottom: 1px solid var(--rand); vertical-align: middle; }
+/* Laatste rij heeft geen onderlijn */
 .mandje-tabel tbody tr:last-child td { border-bottom: none; }
+/* Lichte achtergrond voor de totaalrij */
 .mandje-tabel tfoot { background: var(--achtergrond); font-weight: 700; }
 .mandje-tabel tfoot td { padding: 16px; font-size: 1.05rem; }
 
+/* Label "Totaal" rechts uitlijnen */
 .totaal-label { text-align: right; }
+/* Rode totaalprijs */
 .totaal-prijs { color: var(--rood); font-size: 1.2rem; }
 
+/* Afbeelding en naam naast elkaar in een mandjerce-rij */
 .mandje-product { display: flex; align-items: center; gap: 14px; }
 
+/* Klein productminiatuur in de mandjetabel */
 .mandje-afbeelding {
     width: 54px;
     height: 54px;
@@ -473,9 +556,12 @@ img { display: block; max-width: 100%; }
 }
 
 /* ── Aantal +/- knoppen ──────────────────────────────────────────── */
+/* Rij met min-knop, getal en plus-knop voor het aanpassen van het aantal */
 .aantal-bediening { display: flex; align-items: center; gap: 8px; }
+/* Inline formulier zodat de knop binnen een tabelcel past */
 .inline-formulier { display: inline; }
 
+/* Ronde plus- of minknop */
 .aantal-knop {
     width: 32px;
     height: 32px;
@@ -492,10 +578,13 @@ img { display: block; max-width: 100%; }
     transition: var(--overgang);
 }
 
+/* Rood bij hoveren, grijs en niet klikbaar als uitgeschakeld */
 .aantal-knop:hover:not(:disabled) { background: var(--rood); color: var(--wit); border-color: var(--rood); }
 .aantal-knop:disabled { opacity: 0.35; cursor: not-allowed; }
+/* Getal tussen de knoppen, gecentreerd met vaste breedte */
 .aantal-waarde { font-size: 1rem; font-weight: 600; min-width: 26px; text-align: center; display: inline-block; }
 
+/* Rij onderaan het mandje met "verder winkelen" en "bestellen" */
 .mandje-acties {
     display: flex;
     justify-content: space-between;
@@ -505,8 +594,10 @@ img { display: block; max-width: 100%; }
 }
 
 /* ── Checkout pagina ─────────────────────────────────────────────── */
+/* Gecentreerde container voor het bestelformulier */
 .checkout-pagina { max-width: 920px; margin: 40px auto; padding: 0 24px; }
 
+/* Twee kolommen: besteloverzicht links, formulier rechts */
 .checkout-container {
     display: grid;
     grid-template-columns: 1fr 1.3fr;
@@ -514,6 +605,7 @@ img { display: block; max-width: 100%; }
     align-items: flex-start;
 }
 
+/* Beide blokken hebben dezelfde witte kaart-stijl */
 .bestelling-overzicht, .bestel-formulier {
     background: var(--wit);
     border-radius: var(--radius);
@@ -521,8 +613,10 @@ img { display: block; max-width: 100%; }
     box-shadow: var(--schaduw);
 }
 
+/* Formulierblok krijgt iets meer padding */
 .bestel-formulier { padding: 28px; }
 
+/* Kopje boven de lijst met bestelde producten */
 .bestelling-overzicht h2 {
     font-size: 1.05rem;
     font-weight: 700;
@@ -531,8 +625,10 @@ img { display: block; max-width: 100%; }
     border-bottom: 1px solid var(--rand);
 }
 
+/* Lijst zonder opsommingstekens */
 .overzicht-lijst { list-style: none; margin-bottom: 16px; }
 
+/* Elke rij toont productnaam en prijs naast elkaar */
 .overzicht-item {
     display: flex;
     justify-content: space-between;
@@ -542,6 +638,7 @@ img { display: block; max-width: 100%; }
     gap: 12px;
 }
 
+/* Vette rode totaalregel onderaan het overzicht */
 .overzicht-totaal {
     display: flex;
     justify-content: space-between;
@@ -551,8 +648,10 @@ img { display: block; max-width: 100%; }
     color: var(--rood);
 }
 
+/* Ruimte onder elk formulierveld */
 .formulier-groep { margin-bottom: 18px; }
 
+/* Vet label boven een invoerveld */
 .formulier-groep label {
     display: block;
     font-weight: 600;
@@ -560,6 +659,7 @@ img { display: block; max-width: 100%; }
     margin-bottom: 6px;
 }
 
+/* Invoervelden en tekstgebieden met consistente opmaak */
 .formulier-groep input,
 .formulier-groep textarea {
     width: 100%;
@@ -572,6 +672,7 @@ img { display: block; max-width: 100%; }
     transition: var(--overgang);
 }
 
+/* Rode rand + gloed als het veld geselecteerd is */
 .formulier-groep input:focus,
 .formulier-groep textarea:focus {
     outline: none;
@@ -579,9 +680,11 @@ img { display: block; max-width: 100%; }
     box-shadow: 0 0 0 3px rgba(192,57,43,0.12);
 }
 
+/* Tekstgebied is verticaal versleepbaar */
 .formulier-groep textarea { resize: vertical; }
 
 /* ── Succes pagina ───────────────────────────────────────────────── */
+/* Gecentreerde pagina na een geslaagde bestelling */
 .succes-pagina {
     display: flex;
     align-items: center;
@@ -590,6 +693,7 @@ img { display: block; max-width: 100%; }
     padding: 24px;
 }
 
+/* Witte kaart met bevestigingsbericht */
 .succes-kaart {
     background: var(--wit);
     border-radius: var(--radius);
@@ -600,7 +704,7 @@ img { display: block; max-width: 100%; }
     width: 100%;
 }
 
-/* Groen vinkje icoon */
+/* Groen vinkje icoon bovenaan de succeskaart */
 .succes-icoon {
     width: 72px;
     height: 72px;
@@ -615,10 +719,12 @@ img { display: block; max-width: 100%; }
     font-weight: 700;
 }
 
+/* Titel en ondertekst op de succespagina */
 .succes-kaart h1 { font-size: 1.5rem; margin-bottom: 12px; }
 .succes-kaart p { color: var(--tekst-licht); margin-bottom: 28px; }
 
 /* ── Foutmeldingen ───────────────────────────────────────────────── */
+/* Rode foutbalk bovenaan een formulier bij ongeldige invoer */
 .foutmelding {
     background: #FDEDEC;
     color: var(--rood-donker);
@@ -629,10 +735,12 @@ img { display: block; max-width: 100%; }
     font-size: 0.9rem;
 }
 
+/* Gecentreerde foutpagina (bijv. 404) */
 .fout-container { text-align: center; padding: 80px 24px; }
 .fout-container h2 { font-size: 1.5rem; margin-bottom: 20px; }
 
 /* ── Footer ──────────────────────────────────────────────────────── */
+/* Donkere balk onderaan de pagina met copyrightinformatie */
 .footer {
     background: #1A1A2E;
     color: rgba(255,255,255,0.70);
